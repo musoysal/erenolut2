@@ -35,8 +35,8 @@
             </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/etkinlikler">
-                <i class="fas fa-calendar me-2"></i>
-                Etkinlikler
+                <i class="fas fa-graduation-cap me-2"></i>
+                Eğitimler
               </router-link>
             </li>
             <li class="nav-item">

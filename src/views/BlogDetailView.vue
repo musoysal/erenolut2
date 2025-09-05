@@ -276,7 +276,7 @@ interface BlogPost {
 const post = ref<BlogPost | null>(null)
 const relatedPosts = computed(() => {
   if (!post.value) return []
-  return blogPosts.filter((p) => p.id !== post.value.id).slice(0, 2)
+  return blogPosts.filter((p) => p.id !== post.value!.id).slice(0, 2)
 })
 
 // Mock blog posts data (in real app, this would come from API)
@@ -426,7 +426,7 @@ const blogPosts: BlogPost[] = [
 
 onMounted(() => {
   const postId = parseInt(route.params.id as string)
-  post.value = blogPosts.find((p) => p.id === postId)
+  post.value = blogPosts.find((p) => p.id === postId) || null
 
   if (!post.value) {
     router.push('/blog')

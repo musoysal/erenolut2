@@ -37,7 +37,7 @@
             </li>
             <li class="mb-2">
               <router-link to="/etkinlikler" class="text-white text-decoration-none"
-                >Etkinlikler</router-link
+                >Eğitimler</router-link
               >
             </li>
             <li class="mb-2">
