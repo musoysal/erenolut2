@@ -36,7 +36,7 @@
               >
             </li>
             <li class="mb-2">
-              <router-link to="/etkinlikler" class="text-white text-decoration-none"
+              <router-link to="/egitimler" class="text-white text-decoration-none"
                 >Eğitimler</router-link
               >
             </li>

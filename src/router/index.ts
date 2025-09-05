@@ -21,9 +21,13 @@ const router = createRouter({
       component: AboutView
     },
     {
-      path: '/etkinlikler',
-      name: 'events',
+      path: '/egitimler',
+      name: 'education',
       component: EventsView
+    },
+    {
+      path: '/etkinlikler',
+      redirect: '/egitimler'
     },
     {
       path: '/blog',

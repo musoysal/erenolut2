@@ -34,7 +34,7 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/etkinlikler">
+              <router-link class="nav-link" to="/egitimler">
                 <i class="fas fa-graduation-cap me-2"></i>
                 Eğitimler
               </router-link>

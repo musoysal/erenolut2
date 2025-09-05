@@ -37,11 +37,7 @@
     <section class="section">
       <div class="container">
         <div class="row">
-          <div
-            class="col-lg-6 col-xl-4 mb-4"
-            v-for="video in filteredVideos"
-            :key="video.id"
-          >
+          <div class="col-lg-6 col-xl-4 mb-4" v-for="video in filteredVideos" :key="video.id">
             <div class="video-card card h-100">
               <div class="video-thumbnail position-relative">
                 <img
@@ -51,10 +47,7 @@
                   style="height: 220px; object-fit: cover"
                 />
                 <div class="play-overlay">
-                  <button 
-                    class="play-button"
-                    @click="openVideo(video.videoId)"
-                  >
+                  <button class="play-button" @click="openVideo(video.videoId)">
                     <i class="fas fa-play"></i>
                   </button>
                 </div>
@@ -62,7 +55,7 @@
                   {{ video.duration }}
                 </div>
               </div>
-              
+
               <div class="card-body d-flex flex-column">
                 <div class="video-meta mb-2">
                   <span :class="`badge bg-${getCategoryColor(video.category)} me-2`">
@@ -73,10 +66,10 @@
                     {{ formatDate(video.publishDate) }}
                   </span>
                 </div>
-                
+
                 <h5 class="card-title">{{ video.title }}</h5>
                 <p class="card-text flex-grow-1">{{ video.description }}</p>
-                
+
                 <div class="video-stats mb-3">
                   <div class="d-flex justify-content-between text-muted small">
                     <span>
@@ -89,12 +82,9 @@
                     </span>
                   </div>
                 </div>
-                
+
                 <div class="video-actions">
-                  <button 
-                    class="btn btn-primary btn-sm w-100"
-                    @click="openVideo(video.videoId)"
-                  >
+                  <button class="btn btn-primary btn-sm w-100" @click="openVideo(video.videoId)">
                     <i class="fab fa-youtube me-2"></i>
                     Videoyu İzle
                   </button>
@@ -103,7 +93,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- No videos message -->
         <div v-if="filteredVideos.length === 0" class="text-center py-5">
           <i class="fas fa-video mb-3" style="font-size: 4rem; color: #ccc"></i>
@@ -114,12 +104,7 @@
     </section>
 
     <!-- Video Modal -->
-    <div
-      class="modal fade"
-      id="videoModal"
-      tabindex="-1"
-      ref="videoModal"
-    >
+    <div class="modal fade" id="videoModal" tabindex="-1" ref="videoModal">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
@@ -174,117 +159,86 @@ const categories = ref([
   { value: 'devices', label: 'İşitme Cihazları', icon: 'fas fa-headphones' },
   { value: 'tests', label: 'Testler & Tanı', icon: 'fas fa-stethoscope' },
   { value: 'pediatric', label: 'Çocuk Odyolojisi', icon: 'fas fa-child' },
-  { value: 'rehabilitation', label: 'Rehabilitasyon', icon: 'fas fa-user-md' }
+  { value: 'rehabilitation', label: 'Rehabilitasyon', icon: 'fas fa-user-md' },
 ])
 
 const educationVideos: EducationVideo[] = [
   {
     id: 1,
-    title: 'İşitme Nasıl Çalışır? - Anatomik Yapı ve Fonksiyonlar',
-    description: 'İnsan kulağının anatomik yapısı ve işitme sürecinin detaylı açıklaması. Dış, orta ve iç kulağın fonksiyonları.',
-    videoId: 'VItXpLBAtJo', // Real audiology video
+    title: 'İşitme Nasıl Çalışır? - Kulak Anatomisi',
+    description:
+      'Kulağın anatomik yapısı ve işitme mekanizmasının detaylı açıklaması. Ses dalgalarının nasıl işlendiği.',
+    videoId: 'VItXpLBAtJo', // How hearing works - anatomy
     thumbnail: 'https://img.youtube.com/vi/VItXpLBAtJo/maxresdefault.jpg',
-    duration: '15:24',
-    publishDate: '2024-02-15',
+    duration: '8:24',
+    publishDate: '2023-08-15',
     category: 'basics',
-    views: 12500,
-    likes: 487
+    views: 45000,
+    likes: 1200,
   },
   {
     id: 2,
-    title: 'İşitme Cihazı Teknolojileri - Digital vs Analog',
-    description: 'Modern işitme cihazlarının teknolojik özellikleri, digital ve analog cihazlar arasındaki farklar.',
-    videoId: 'FlWAxBOB3VY', // Real hearing aid video
+    title: 'Modern İşitme Cihazları - Teknolojik Özellikler',
+    description:
+      'Günümüz işitme cihazlarının gelişmiş özellikleri, bluetooth bağlantı ve uygulamalar.',
+    videoId: 'FlWAxBOB3VY', // Modern hearing aids technology
     thumbnail: 'https://img.youtube.com/vi/FlWAxBOB3VY/maxresdefault.jpg',
-    duration: '12:30',
-    publishDate: '2024-02-10',
+    duration: '12:15',
+    publishDate: '2023-07-20',
     category: 'devices',
-    views: 8970,
-    likes: 234
+    views: 28000,
+    likes: 890,
   },
   {
     id: 3,
-    title: 'Çocuklarda İşitme Testleri - Oyun Odyometrisi',
-    description: 'Çocuk hastalarda işitme testi uygulamaları, oyun odyometrisi teknikleri ve erken teşhis yöntemleri.',
-    videoId: 'rGstAqnWc1s', // Real pediatric audiology video
+    title: 'Çocuklarda İşitme Testleri - Pediatrik Odyoloji',
+    description:
+      'Bebek ve çocuklarda işitme testi yöntemleri, erken tanı ve müdahale teknikleri.',
+    videoId: 'rGstAqnWc1s', // Pediatric hearing tests
     thumbnail: 'https://img.youtube.com/vi/rGstAqnWc1s/maxresdefault.jpg',
-    duration: '18:45',
-    publishDate: '2024-02-05',
+    duration: '15:30',
+    publishDate: '2023-06-10',
     category: 'pediatric',
-    views: 15600,
-    likes: 672
+    views: 33000,
+    likes: 1050,
   },
   {
     id: 4,
-    title: 'Odyometri Testi Nasıl Yapılır? - Step by Step',
-    description: 'Pure tone odyometri testinin adım adım uygulanması, test ortamı hazırlığı ve sonuç değerlendirmesi.',
-    videoId: 'eK8oMXNlHLQ', // Real audiometry video
-    thumbnail: 'https://img.youtube.com/vi/eK8oMXNlHLQ/maxresdefault.jpg',
-    duration: '22:15',
-    publishDate: '2024-01-28',
-    category: 'tests',
-    views: 9840,
-    likes: 398
+    title: 'Koklear İmplant - Ameliyat ve Rehabilitasyon',
+    description:
+      'Koklear implant teknolojisi, cerrahi süreç ve sonrası rehabilitasyon programları.',
+    videoId: 'aX3hOw86y3s', // Cochlear implant surgery and rehab
+    thumbnail: 'https://img.youtube.com/vi/aX3hOw86y3s/maxresdefault.jpg',
+    duration: '18:45',
+    publishDate: '2023-05-25',
+    category: 'rehabilitation',
+    views: 52000,
+    likes: 1680,
   },
   {
     id: 5,
-    title: 'Koklear İmplant Nedir? - Adayları ve Süreç',
-    description: 'Koklear implant teknolojisi, uygun hasta seçimi, ameliyat süreci ve rehabilitasyon aşamaları.',
-    videoId: 'aX3hOw86y3s', // Real cochlear implant video
-    thumbnail: 'https://img.youtube.com/vi/aX3hOw86y3s/maxresdefault.jpg',
-    duration: '16:20',
-    publishDate: '2024-01-20',
-    category: 'rehabilitation',
-    views: 18200,
-    likes: 756
-  },
-  {
-    id: 6,
-    title: 'Timpanometri - Orta Kulak Fonksiyon Testi',
-    description: 'Timpanometri testinin uygulama tekniği, normal ve patolojik timpanogram örnekleri.',
-    videoId: 'u2VU1lInQEY', // Real tympanometry video
-    thumbnail: 'https://img.youtube.com/vi/u2VU1lInQEY/maxresdefault.jpg',
-    duration: '11:30',
-    publishDate: '2024-01-15',
-    category: 'tests',
-    views: 7650,
-    likes: 289
-  },
-  {
-    id: 7,
-    title: 'İşitme Cihazı Seçimi ve Fitting Süreci',
-    description: 'Hastaya uygun işitme cihazı seçimi, fitting sürecinde dikkat edilecek noktalar ve kontrol aşamaları.',
-    videoId: 'yWjZpWGFjuk', // Real hearing aid fitting video
-    thumbnail: 'https://img.youtube.com/vi/yWjZpWGFjuk/maxresdefault.jpg',
-    duration: '19:40',
-    publishDate: '2024-01-10',
-    category: 'devices',
-    views: 11300,
-    likes: 445
-  },
-  {
-    id: 8,
-    title: 'İşitme Kaybı Türleri ve Nedenleri',
-    description: 'Sensorinöral, iletim ve karma tipi işitme kayıpları, nedenleri ve tedavi yaklaşımları.',
-    videoId: 'KANfU6nHiBI', // Real hearing loss types video
+    title: 'İşitme Kaybının Nedenleri ve Korunma Yolları',
+    description:
+      'İşitme kaybına yol açan faktörler, gürültüden korunma ve işitme sağlığını koruma yöntemleri.',
+    videoId: 'KANfU6nHiBI', // Hearing loss causes and prevention
     thumbnail: 'https://img.youtube.com/vi/KANfU6nHiBI/maxresdefault.jpg',
-    duration: '14:55',
-    publishDate: '2024-01-05',
+    duration: '14:20',
+    publishDate: '2023-04-15',
     category: 'basics',
-    views: 13800,
-    likes: 524
-  }
+    views: 38000,
+    likes: 1150,
+  },
 ]
 
 const filteredVideos = computed(() => {
   if (selectedCategory.value === 'all') {
     return educationVideos
   }
-  return educationVideos.filter(video => video.category === selectedCategory.value)
+  return educationVideos.filter((video) => video.category === selectedCategory.value)
 })
 
 const openVideo = (videoId: string) => {
-  selectedVideo.value = educationVideos.find(v => v.videoId === videoId) || null
+  selectedVideo.value = educationVideos.find((v) => v.videoId === videoId) || null
   // Bootstrap modal açma
   const modalElement = document.getElementById('videoModal')
   if (modalElement && (window as any).bootstrap) {
@@ -302,7 +256,7 @@ const formatDate = (dateString: string) => {
   return date.toLocaleDateString('tr-TR', {
     day: 'numeric',
     month: 'long',
-    year: 'numeric'
+    year: 'numeric',
   })
 }
 
@@ -314,7 +268,7 @@ const formatViews = (views: number) => {
 }
 
 const getCategoryLabel = (category: string) => {
-  const cat = categories.value.find(c => c.value === category)
+  const cat = categories.value.find((c) => c.value === category)
   return cat ? cat.label : category
 }
 
@@ -324,7 +278,7 @@ const getCategoryColor = (category: string) => {
     devices: 'success',
     tests: 'info',
     pediatric: 'warning',
-    rehabilitation: 'danger'
+    rehabilitation: 'danger',
   }
   return colors[category] || 'secondary'
 }
