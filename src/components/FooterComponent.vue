@@ -41,6 +41,11 @@
               >
             </li>
             <li class="mb-2">
+              <router-link to="/cihazlar" class="text-white text-decoration-none"
+                >Cihazlar</router-link
+              >
+            </li>
+            <li class="mb-2">
               <router-link to="/blog" class="text-white text-decoration-none">Blog</router-link>
             </li>
           </ul>

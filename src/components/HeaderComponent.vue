@@ -40,6 +40,12 @@
               </router-link>
             </li>
             <li class="nav-item">
+              <router-link class="nav-link" to="/cihazlar">
+                <i class="fas fa-stethoscope me-2"></i>
+                Cihazlar
+              </router-link>
+            </li>
+            <li class="nav-item">
               <router-link class="nav-link" to="/blog">
                 <i class="fas fa-blog me-2"></i>
                 Blog

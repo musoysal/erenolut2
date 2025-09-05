@@ -263,7 +263,7 @@ const filteredVideos = computed(() => {
 
 const openVideo = (videoId: string) => {
   selectedVideo.value = educationVideos.find((v) => v.videoId === videoId) || null
-  
+
   // Always use modal for both mobile and desktop
   setTimeout(() => {
     const modalElement = document.getElementById('videoModal')

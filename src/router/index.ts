@@ -13,43 +13,48 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
     },
     {
       path: '/hakkimizda',
       name: 'about',
-      component: AboutView
+      component: AboutView,
     },
     {
       path: '/egitimler',
       name: 'education',
-      component: EventsView
+      component: EventsView,
     },
     {
       path: '/etkinlikler',
-      redirect: '/egitimler'
+      redirect: '/egitimler',
+    },
+    {
+      path: '/cihazlar',
+      name: 'devices',
+      component: () => import('../views/DevicesView.vue'),
     },
     {
       path: '/blog',
       name: 'blog',
-      component: BlogView
+      component: BlogView,
     },
     {
       path: '/blog/:id',
       name: 'blog-detail',
-      component: BlogDetailView
+      component: BlogDetailView,
     },
     {
       path: '/duyurular',
       name: 'news',
-      component: NewsView
+      component: NewsView,
     },
     {
       path: '/iletisim',
       name: 'contact',
-      component: ContactView
-    }
-  ]
+      component: ContactView,
+    },
+  ],
 })
 
 export default router
