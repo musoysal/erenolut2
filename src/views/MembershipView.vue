@@ -5,22 +5,29 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-6">
-            <h1 class="display-4 fw-bold mb-3">Odyoloji Kulübü'ne Katıl!</h1>
-            <p class="lead mb-4">
-              Odyoloji alanındaki gelişmeleri takip et, deneyim payla ve karierin için önemli adımlar at.
+            <h1 class="display-4 fw-bold mb-3 text-dark">Odyoloji Kulübü'ne Katıl!</h1>
+            <p class="lead mb-4 text-dark">
+              Odyoloji alanındaki gelişmeleri takip et, deneyim payla ve karierin için önemli
+              adımlar at.
             </p>
-            <div class="hero-stats row text-center">
+            <div class="hero-stats row text-center mt-4">
               <div class="col-4">
-                <h3 class="fw-bold">{{ memberStats.totalMembers }}+</h3>
-                <small>Aktif Üye</small>
+                <div class="stat-card">
+                  <h2 class="fw-bold text-white mb-1">{{ memberStats.totalMembers }}+</h2>
+                  <p class="stat-label mb-0">Aktif Üye</p>
+                </div>
               </div>
               <div class="col-4">
-                <h3 class="fw-bold">{{ memberStats.universities }}</h3>
-                <small>Üniversite</small>
+                <div class="stat-card">
+                  <h2 class="fw-bold text-white mb-1">{{ memberStats.universities }}</h2>
+                  <p class="stat-label mb-0">Üniversite</p>
+                </div>
               </div>
               <div class="col-4">
-                <h3 class="fw-bold">{{ memberStats.events }}</h3>
-                <small>Etkinlik</small>
+                <div class="stat-card">
+                  <h2 class="fw-bold text-white mb-1">{{ memberStats.events }}</h2>
+                  <p class="stat-label mb-0">Etkinlik</p>
+                </div>
               </div>
             </div>
           </div>
@@ -49,11 +56,7 @@
           </div>
         </div>
         <div class="row">
-          <div
-            v-for="benefit in benefits"
-            :key="benefit.id"
-            class="col-lg-4 col-md-6 mb-4"
-          >
+          <div v-for="benefit in benefits" :key="benefit.id" class="col-lg-4 col-md-6 mb-4">
             <div class="benefit-card h-100 text-center p-4">
               <div class="benefit-icon mb-3">
                 <i :class="benefit.icon"></i>
@@ -81,7 +84,7 @@
                 <!-- Personal Information -->
                 <div class="form-section-title">
                   <h5><i class="fas fa-user me-2"></i>Kişisel Bilgiler</h5>
-                  <hr>
+                  <hr />
                 </div>
 
                 <div class="row">
@@ -94,7 +97,7 @@
                       v-model="formData.firstName"
                       required
                       :class="{ 'is-invalid': errors.firstName }"
-                    >
+                    />
                     <div v-if="errors.firstName" class="invalid-feedback">
                       {{ errors.firstName }}
                     </div>
@@ -108,7 +111,7 @@
                       v-model="formData.lastName"
                       required
                       :class="{ 'is-invalid': errors.lastName }"
-                    >
+                    />
                     <div v-if="errors.lastName" class="invalid-feedback">
                       {{ errors.lastName }}
                     </div>
@@ -125,7 +128,7 @@
                       v-model="formData.email"
                       required
                       :class="{ 'is-invalid': errors.email }"
-                    >
+                    />
                     <div v-if="errors.email" class="invalid-feedback">
                       {{ errors.email }}
                     </div>
@@ -138,7 +141,7 @@
                       id="phone"
                       v-model="formData.phone"
                       placeholder="0555 123 4567"
-                    >
+                    />
                   </div>
                 </div>
 
@@ -149,13 +152,13 @@
                     class="form-control"
                     id="birthDate"
                     v-model="formData.birthDate"
-                  >
+                  />
                 </div>
 
                 <!-- Academic Information -->
                 <div class="form-section-title mt-4">
                   <h5><i class="fas fa-graduation-cap me-2"></i>Akademik Bilgiler</h5>
-                  <hr>
+                  <hr />
                 </div>
 
                 <div class="row">
@@ -187,7 +190,7 @@
                       required
                       placeholder="Sağlık Bilimleri Fakültesi"
                       :class="{ 'is-invalid': errors.faculty }"
-                    >
+                    />
                     <div v-if="errors.faculty" class="invalid-feedback">
                       {{ errors.faculty }}
                     </div>
@@ -242,24 +245,22 @@
                 <!-- Interests -->
                 <div class="form-section-title mt-4">
                   <h5><i class="fas fa-heart me-2"></i>İlgi Alanları</h5>
-                  <hr>
+                  <hr />
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label">Hangi konularla ilgileniyorsun? (Birden fazla seçebilirsin)</label>
+                  <label class="form-label"
+                    >Hangi konularla ilgileniyorsun? (Birden fazla seçebilirsin)</label
+                  >
                   <div class="interest-grid">
-                    <div
-                      v-for="interest in interests"
-                      :key="interest.id"
-                      class="form-check"
-                    >
+                    <div v-for="interest in interests" :key="interest.id" class="form-check">
                       <input
                         class="form-check-input"
                         type="checkbox"
                         :value="interest.id"
                         :id="'interest-' + interest.id"
                         v-model="formData.selectedInterests"
-                      >
+                      />
                       <label class="form-check-label" :for="'interest-' + interest.id">
                         <i :class="interest.icon + ' me-2'"></i>
                         {{ interest.name }}
@@ -271,11 +272,13 @@
                 <!-- Additional Information -->
                 <div class="form-section-title mt-4">
                   <h5><i class="fas fa-info-circle me-2"></i>Ek Bilgiler</h5>
-                  <hr>
+                  <hr />
                 </div>
 
                 <div class="mb-3">
-                  <label for="motivation" class="form-label">Neden kulübe katılmak istiyorsun?</label>
+                  <label for="motivation" class="form-label"
+                    >Neden kulübe katılmak istiyorsun?</label
+                  >
                   <textarea
                     class="form-control"
                     id="motivation"
@@ -286,7 +289,9 @@
                 </div>
 
                 <div class="mb-3">
-                  <label for="experience" class="form-label">Odyoloji alanındaki deneyimin nedir?</label>
+                  <label for="experience" class="form-label"
+                    >Odyoloji alanındaki deneyimin nedir?</label
+                  >
                   <textarea
                     class="form-control"
                     id="experience"
@@ -306,9 +311,10 @@
                       v-model="formData.agreement"
                       required
                       :class="{ 'is-invalid': errors.agreement }"
-                    >
+                    />
                     <label class="form-check-label" for="agreement">
-                      <strong>Kulüp kurallarını</strong> ve <strong>gizlilik politikasını</strong> okudum, kabul ediyorum. *
+                      <strong>Kulüp kurallarını</strong> ve
+                      <strong>gizlilik politikasını</strong> okudum, kabul ediyorum. *
                     </label>
                     <div v-if="errors.agreement" class="invalid-feedback">
                       {{ errors.agreement }}
@@ -345,7 +351,8 @@
             </div>
             <h4 class="fw-bold mb-3">Başvurun Alındı! 🎉</h4>
             <p class="text-muted mb-4">
-              Başvurun başarıyla iletildi. En kısa sürede e-posta adresinize bilgilendirme mesajı göndereceğiz.
+              Başvurun başarıyla iletildi. En kısa sürede e-posta adresinize bilgilendirme mesajı
+              göndereceğiz.
             </p>
             <button type="button" class="btn btn-primary" @click="closeSuccessModal">
               Anasayfaya Dön
@@ -400,7 +407,7 @@ const errors = ref<Record<string, string>>({})
 const memberStats = {
   totalMembers: 150,
   universities: 25,
-  events: 48
+  events: 48,
 }
 
 const formData = reactive<FormData>({
@@ -416,7 +423,7 @@ const formData = reactive<FormData>({
   selectedInterests: [],
   motivation: '',
   experience: '',
-  agreement: false
+  agreement: false,
 })
 
 // Benefits data
@@ -425,38 +432,38 @@ const benefits: Benefit[] = [
     id: '1',
     icon: 'fas fa-graduation-cap text-primary display-6',
     title: 'Eğitim Fırsatları',
-    description: 'Online seminerler, workshoplar ve sertifika programlarına ücretsiz erişim.'
+    description: 'Online seminerler, workshoplar ve sertifika programlarına ücretsiz erişim.',
   },
   {
     id: '2',
     icon: 'fas fa-users text-success display-6',
     title: 'Networking',
-    description: 'Odyoloji alanındaki profesyoneller ve öğrencilerle tanışma fırsatı.'
+    description: 'Odyoloji alanındaki profesyoneller ve öğrencilerle tanışma fırsatı.',
   },
   {
     id: '3',
     icon: 'fas fa-briefcase text-warning display-6',
     title: 'Kariyer Desteği',
-    description: 'İş fırsatları, staj imkanları ve mentörlük programları.'
+    description: 'İş fırsatları, staj imkanları ve mentörlük programları.',
   },
   {
     id: '4',
     icon: 'fas fa-book text-info display-6',
     title: 'Kaynak Paylaşımı',
-    description: 'Güncel araştırmalar, makaleler ve eğitim materyallerine erişim.'
+    description: 'Güncel araştırmalar, makaleler ve eğitim materyallerine erişim.',
   },
   {
     id: '5',
     icon: 'fas fa-calendar text-danger display-6',
     title: 'Etkinlikler',
-    description: 'Konferanslar, söyleşiler ve sosyal etkinliklerde öncelikli katılım.'
+    description: 'Konferanslar, söyleşiler ve sosyal etkinliklerde öncelikli katılım.',
   },
   {
     id: '6',
     icon: 'fas fa-certificate text-secondary display-6',
     title: 'Sertifikalar',
-    description: 'Katıldığın etkinlikler için geçerli katılım sertifikaları.'
-  }
+    description: 'Katıldığın etkinlikler için geçerli katılım sertifikaları.',
+  },
 ]
 
 // Universities data
@@ -471,7 +478,7 @@ const universities = [
   'Anadolu Üniversitesi',
   'Başkent Üniversitesi',
   'İstanbul Medipol Üniversitesi',
-  'Diğer'
+  'Diğer',
 ]
 
 // Interests data
@@ -483,47 +490,47 @@ const interests: Interest[] = [
   { id: 'research', name: 'Araştırma', icon: 'fas fa-flask' },
   { id: 'rehabilitation', name: 'Rehabilitasyon', icon: 'fas fa-hands-helping' },
   { id: 'tinnitus', name: 'Tinnitus', icon: 'fas fa-volume-up' },
-  { id: 'balance', name: 'Denge Bozuklukları', icon: 'fas fa-balance-scale' }
+  { id: 'balance', name: 'Denge Bozuklukları', icon: 'fas fa-balance-scale' },
 ]
 
 // Methods
 const validateForm = (): boolean => {
   errors.value = {}
-  
+
   if (!formData.firstName.trim()) {
     errors.value.firstName = 'Ad alanı zorunludur'
   }
-  
+
   if (!formData.lastName.trim()) {
     errors.value.lastName = 'Soyad alanı zorunludur'
   }
-  
+
   if (!formData.email.trim()) {
     errors.value.email = 'E-posta alanı zorunludur'
   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
     errors.value.email = 'Geçerli bir e-posta adresi girin'
   }
-  
+
   if (!formData.university) {
     errors.value.university = 'Üniversite seçimi zorunludur'
   }
-  
+
   if (!formData.faculty.trim()) {
     errors.value.faculty = 'Fakülte alanı zorunludur'
   }
-  
+
   if (!formData.department) {
     errors.value.department = 'Bölüm seçimi zorunludur'
   }
-  
+
   if (!formData.grade) {
     errors.value.grade = 'Sınıf seçimi zorunludur'
   }
-  
+
   if (!formData.agreement) {
     errors.value.agreement = 'Kulüp kurallarını kabul etmelisiniz'
   }
-  
+
   return Object.keys(errors.value).length === 0
 }
 
@@ -538,16 +545,16 @@ const submitForm = async () => {
     }
     return
   }
-  
+
   isSubmitting.value = true
-  
+
   try {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+
     // Show success modal
     showSuccessModal()
-    
+
     // Reset form
     Object.assign(formData, {
       firstName: '',
@@ -562,9 +569,8 @@ const submitForm = async () => {
       selectedInterests: [],
       motivation: '',
       experience: '',
-      agreement: false
+      agreement: false,
     })
-    
   } catch (error) {
     console.error('Form submission error:', error)
     alert('Başvuru gönderilirken bir hata oluştu. Lütfen tekrar deneyin.')
@@ -583,7 +589,7 @@ const showSuccessModal = () => {
       // Fallback
       modalElement.classList.add('show')
       modalElement.style.display = 'block'
-      
+
       const backdrop = document.createElement('div')
       backdrop.className = 'modal-backdrop fade show'
       backdrop.id = 'success-modal-backdrop'
@@ -605,7 +611,7 @@ const closeSuccessModal = () => {
       // Fallback
       modalElement.classList.remove('show')
       modalElement.style.display = 'none'
-      
+
       const backdrop = document.getElementById('success-modal-backdrop')
       if (backdrop) {
         backdrop.remove()
@@ -613,7 +619,7 @@ const closeSuccessModal = () => {
       document.body.classList.remove('modal-open')
     }
   }
-  
+
   // Redirect to home
   router.push('/')
 }
@@ -621,7 +627,37 @@ const closeSuccessModal = () => {
 
 <style scoped>
 .bg-gradient {
-  background: linear-gradient(135deg, var(--bs-primary) 0%, #4a90e2 100%);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.stat-card {
+  background: #007bff;
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  border: 2px solid #0056b3;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 123, 255, 0.2);
+}
+
+.stat-card:hover {
+  background: #0056b3;
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 123, 255, 0.3);
+}
+
+.stat-label {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.stat-card h2 {
+  font-size: 3rem;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 800;
 }
 
 .hero-illustration {
@@ -669,7 +705,8 @@ const closeSuccessModal = () => {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -751,14 +788,16 @@ const closeSuccessModal = () => {
   font-weight: 600;
 }
 
-.form-control, .form-select {
+.form-control,
+.form-select {
   border-radius: 8px;
   border: 1px solid #d1d5db;
   padding: 0.75rem 1rem;
   transition: all 0.3s ease;
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
   border-color: var(--bs-primary);
   box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
 }
@@ -798,27 +837,55 @@ const closeSuccessModal = () => {
   .form-card {
     padding: 1.5rem;
   }
-  
+
   .hero-stats {
     margin-top: 2rem;
   }
-  
+
+  .stat-card {
+    padding: 1.2rem 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .stat-card h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
   .interest-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .floating-icons {
     display: none;
   }
 }
 
 /* Animation delays for benefit cards */
-.benefit-card:nth-child(1) { animation: fadeInUp 0.6s ease-out 0.1s both; }
-.benefit-card:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.2s both; }
-.benefit-card:nth-child(3) { animation: fadeInUp 0.6s ease-out 0.3s both; }
-.benefit-card:nth-child(4) { animation: fadeInUp 0.6s ease-out 0.4s both; }
-.benefit-card:nth-child(5) { animation: fadeInUp 0.6s ease-out 0.5s both; }
-.benefit-card:nth-child(6) { animation: fadeInUp 0.6s ease-out 0.6s both; }
+.benefit-card:nth-child(1) {
+  animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+.benefit-card:nth-child(2) {
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+.benefit-card:nth-child(3) {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+.benefit-card:nth-child(4) {
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+.benefit-card:nth-child(5) {
+  animation: fadeInUp 0.6s ease-out 0.5s both;
+}
+.benefit-card:nth-child(6) {
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+}
 
 @keyframes fadeInUp {
   from {
