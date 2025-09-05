@@ -307,8 +307,8 @@ const blogPosts = [
     readTime: '6 dk',
     image: 'https://picsum.photos/800/600?random=1',
     tags: ['çocuk', 'pediatri', 'erken teşhis', 'işitme kaybı'],
-    views: 156,
-    likes: 24,
+    views: 756,
+    likes: 89,
   },
 ]
 
