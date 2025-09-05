@@ -13,19 +13,19 @@
             <div class="hero-stats row text-center mt-4">
               <div class="col-4">
                 <div class="stat-card">
-                  <h2 class="fw-bold text-white mb-1">{{ memberStats.totalMembers }}+</h2>
+                  <h2 class="fw-bold text-dark mb-1">{{ memberStats.totalMembers }}+</h2>
                   <p class="stat-label mb-0">Aktif Üye</p>
                 </div>
               </div>
               <div class="col-4">
                 <div class="stat-card">
-                  <h2 class="fw-bold text-white mb-1">{{ memberStats.universities }}</h2>
+                  <h2 class="fw-bold text-dark mb-1">{{ memberStats.universities }}</h2>
                   <p class="stat-label mb-0">Üniversite</p>
                 </div>
               </div>
               <div class="col-4">
                 <div class="stat-card">
-                  <h2 class="fw-bold text-white mb-1">{{ memberStats.events }}</h2>
+                  <h2 class="fw-bold text-dark mb-1">{{ memberStats.events }}</h2>
                   <p class="stat-label mb-0">Etkinlik</p>
                 </div>
               </div>
@@ -631,32 +631,27 @@ const closeSuccessModal = () => {
 }
 
 .stat-card {
-  background: #007bff;
+  background: transparent;
   border-radius: 16px;
   padding: 1.5rem 1rem;
-  border: 2px solid #0056b3;
+  border: none;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 32px rgba(0, 123, 255, 0.2);
 }
 
 .stat-card:hover {
-  background: #0056b3;
   transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0, 123, 255, 0.3);
 }
 
 .stat-label {
-  color: #ffffff;
+  color: #2c3e50;
   font-size: 1rem;
   font-weight: 600;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   letter-spacing: 0.5px;
 }
 
 .stat-card h2 {
   font-size: 3rem;
-  color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: #2c3e50;
   font-weight: 800;
 }
 
@@ -845,7 +840,7 @@ const closeSuccessModal = () => {
   .stat-card {
     padding: 1.2rem 0.8rem;
     margin-bottom: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: none;
   }
 
   .stat-card h2 {
