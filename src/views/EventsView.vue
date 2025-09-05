@@ -192,8 +192,7 @@ const educationVideos: EducationVideo[] = [
   {
     id: 3,
     title: 'Çocuklarda İşitme Testleri - Pediatrik Odyoloji',
-    description:
-      'Bebek ve çocuklarda işitme testi yöntemleri, erken tanı ve müdahale teknikleri.',
+    description: 'Bebek ve çocuklarda işitme testi yöntemleri, erken tanı ve müdahale teknikleri.',
     videoId: 'rGstAqnWc1s', // Pediatric hearing tests
     thumbnail: 'https://img.youtube.com/vi/rGstAqnWc1s/maxresdefault.jpg',
     duration: '15:30',
@@ -227,6 +226,19 @@ const educationVideos: EducationVideo[] = [
     category: 'basics',
     views: 38000,
     likes: 1150,
+  },
+  {
+    id: 6,
+    title: 'Helix İşitme Merkezleri - İşitme Cihazı Deneyimi',
+    description:
+      "Helix İşitme Merkezleri'nde işitme cihazı deneyimi, hasta memnuniyeti ve profesyonel hizmet anlayışı.",
+    videoId: 'b7H5CVrEu6I', // Helix İşitme Merkezleri video
+    thumbnail: 'https://img.youtube.com/vi/b7H5CVrEu6I/maxresdefault.jpg',
+    duration: '10:30',
+    publishDate: '2023-09-10',
+    category: 'devices',
+    views: 15000,
+    likes: 420,
   },
 ]
 
