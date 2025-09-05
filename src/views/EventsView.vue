@@ -104,8 +104,8 @@
     </section>
 
     <!-- Video Modal -->
-    <div class="modal fade" id="videoModal" tabindex="-1" ref="videoModal">
-      <div class="modal-dialog modal-xl">
+    <div class="modal fade" id="videoModal" tabindex="-1" ref="videoModal" @click="closeOnBackdropClick">
+      <div class="modal-dialog modal-xl" @click.stop>
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">{{ selectedVideo?.title }}</h5>
@@ -135,7 +135,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 interface EducationVideo {
   id: number
@@ -251,16 +251,62 @@ const filteredVideos = computed(() => {
 
 const openVideo = (videoId: string) => {
   selectedVideo.value = educationVideos.find((v) => v.videoId === videoId) || null
-  // Bootstrap modal açma
-  const modalElement = document.getElementById('videoModal')
-  if (modalElement && (window as any).bootstrap) {
-    const modal = new (window as any).bootstrap.Modal(modalElement)
-    modal.show()
-  }
+  
+  // Bootstrap modal açma - multiple methods
+  setTimeout(() => {
+    const modalElement = document.getElementById('videoModal')
+    if (modalElement) {
+      // Method 1: Bootstrap JS API
+      if ((window as any).bootstrap && (window as any).bootstrap.Modal) {
+        const modal = new (window as any).bootstrap.Modal(modalElement)
+        modal.show()
+      } 
+      // Method 2: Manual class manipulation if Bootstrap JS not available
+      else {
+        modalElement.classList.add('show')
+        modalElement.style.display = 'block'
+        modalElement.setAttribute('aria-modal', 'true')
+        modalElement.setAttribute('role', 'dialog')
+        
+        // Add backdrop
+        const backdrop = document.createElement('div')
+        backdrop.className = 'modal-backdrop fade show'
+        backdrop.id = 'modal-backdrop'
+        document.body.appendChild(backdrop)
+        document.body.classList.add('modal-open')
+      }
+    }
+  }, 100)
 }
 
 const closeVideo = () => {
   selectedVideo.value = null
+  
+  // Modal kapatma
+  const modalElement = document.getElementById('videoModal')
+  if (modalElement) {
+    // Bootstrap JS API ile
+    if ((window as any).bootstrap && (window as any).bootstrap.Modal) {
+      const modal = (window as any).bootstrap.Modal.getInstance(modalElement)
+      if (modal) {
+        modal.hide()
+      }
+    } 
+    // Manuel kapatma
+    else {
+      modalElement.classList.remove('show')
+      modalElement.style.display = 'none'
+      modalElement.removeAttribute('aria-modal')
+      modalElement.removeAttribute('role')
+      
+      // Remove backdrop
+      const backdrop = document.getElementById('modal-backdrop')
+      if (backdrop) {
+        backdrop.remove()
+      }
+      document.body.classList.remove('modal-open')
+    }
+  }
 }
 
 const formatDate = (dateString: string) => {
@@ -294,6 +340,29 @@ const getCategoryColor = (category: string) => {
   }
   return colors[category] || 'secondary'
 }
+
+// ESC tuşu ile modal kapatma
+const handleKeyPress = (event: KeyboardEvent) => {
+  if (event.key === 'Escape' && selectedVideo.value) {
+    closeVideo()
+  }
+}
+
+// Backdrop click ile modal kapatma
+const closeOnBackdropClick = () => {
+  if (selectedVideo.value) {
+    closeVideo()
+  }
+}
+
+// Event listeners
+onMounted(() => {
+  document.addEventListener('keydown', handleKeyPress)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeyPress)
+})
 </script>
 
 <style scoped>
