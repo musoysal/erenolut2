@@ -86,8 +86,7 @@
                 <div class="video-actions">
                   <button class="btn btn-primary btn-sm w-100" @click="openVideo(video.videoId)">
                     <i class="fab fa-youtube me-2"></i>
-                    <span class="d-none d-md-inline">Videoyu İzle</span>
-                    <span class="d-md-none">YouTube'da Aç</span>
+                    Videoyu İzle
                   </button>
                 </div>
               </div>
@@ -138,7 +137,7 @@
             <!-- Mobile friendly message -->
             <div class="d-md-none text-center p-3 text-muted small">
               <i class="fas fa-mobile-alt me-1"></i>
-              Mobil cihazda sorun yaşıyorsanız "YouTube'da Aç" butonunu kullanın
+              Mobil cihazlarda tam ekran için videoya dokunabilirsiniz
             </div>
           </div>
         </div>
@@ -264,43 +263,32 @@ const filteredVideos = computed(() => {
 
 const openVideo = (videoId: string) => {
   selectedVideo.value = educationVideos.find((v) => v.videoId === videoId) || null
-
-  // Mobile device detection
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent,
-  )
-
-  if (isMobile) {
-    // Mobile: Open YouTube app or browser directly
-    const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`
-    window.open(youtubeUrl, '_blank')
-  } else {
-    // Desktop: Use modal
-    setTimeout(() => {
-      const modalElement = document.getElementById('videoModal')
-      if (modalElement) {
-        // Method 1: Bootstrap JS API
-        if ((window as any).bootstrap && (window as any).bootstrap.Modal) {
-          const modal = new (window as any).bootstrap.Modal(modalElement)
-          modal.show()
-        }
-        // Method 2: Manual class manipulation if Bootstrap JS not available
-        else {
-          modalElement.classList.add('show')
-          modalElement.style.display = 'block'
-          modalElement.setAttribute('aria-modal', 'true')
-          modalElement.setAttribute('role', 'dialog')
-
-          // Add backdrop
-          const backdrop = document.createElement('div')
-          backdrop.className = 'modal-backdrop fade show'
-          backdrop.id = 'modal-backdrop'
-          document.body.appendChild(backdrop)
-          document.body.classList.add('modal-open')
-        }
+  
+  // Always use modal for both mobile and desktop
+  setTimeout(() => {
+    const modalElement = document.getElementById('videoModal')
+    if (modalElement) {
+      // Method 1: Bootstrap JS API
+      if ((window as any).bootstrap && (window as any).bootstrap.Modal) {
+        const modal = new (window as any).bootstrap.Modal(modalElement)
+        modal.show()
       }
-    }, 100)
-  }
+      // Method 2: Manual class manipulation if Bootstrap JS not available
+      else {
+        modalElement.classList.add('show')
+        modalElement.style.display = 'block'
+        modalElement.setAttribute('aria-modal', 'true')
+        modalElement.setAttribute('role', 'dialog')
+
+        // Add backdrop
+        const backdrop = document.createElement('div')
+        backdrop.className = 'modal-backdrop fade show'
+        backdrop.id = 'modal-backdrop'
+        document.body.appendChild(backdrop)
+        document.body.classList.add('modal-open')
+      }
+    }
+  }, 100)
 }
 
 const closeVideo = () => {
