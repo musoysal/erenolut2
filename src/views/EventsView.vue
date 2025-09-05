@@ -86,7 +86,8 @@
                 <div class="video-actions">
                   <button class="btn btn-primary btn-sm w-100" @click="openVideo(video.videoId)">
                     <i class="fab fa-youtube me-2"></i>
-                    Videoyu İzle
+                    <span class="d-none d-md-inline">Videoyu İzle</span>
+                    <span class="d-md-none">YouTube'da Aç</span>
                   </button>
                 </div>
               </div>
@@ -104,7 +105,13 @@
     </section>
 
     <!-- Video Modal -->
-    <div class="modal fade" id="videoModal" tabindex="-1" ref="videoModal" @click="closeOnBackdropClick">
+    <div
+      class="modal fade"
+      id="videoModal"
+      tabindex="-1"
+      ref="videoModal"
+      @click="closeOnBackdropClick"
+    >
       <div class="modal-dialog modal-xl" @click.stop>
         <div class="modal-content">
           <div class="modal-header">
@@ -120,12 +127,18 @@
             <div class="ratio ratio-16x9">
               <iframe
                 v-if="selectedVideo"
-                :src="`https://www.youtube.com/embed/${selectedVideo.videoId}?autoplay=1`"
+                :src="`https://www.youtube.com/embed/${selectedVideo.videoId}?autoplay=1&playsinline=1`"
                 title="YouTube video player"
                 frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
+                loading="lazy"
               ></iframe>
+            </div>
+            <!-- Mobile friendly message -->
+            <div class="d-md-none text-center p-3 text-muted small">
+              <i class="fas fa-mobile-alt me-1"></i>
+              Mobil cihazda sorun yaşıyorsanız "YouTube'da Aç" butonunu kullanın
             </div>
           </div>
         </div>
@@ -251,37 +264,48 @@ const filteredVideos = computed(() => {
 
 const openVideo = (videoId: string) => {
   selectedVideo.value = educationVideos.find((v) => v.videoId === videoId) || null
-  
-  // Bootstrap modal açma - multiple methods
-  setTimeout(() => {
-    const modalElement = document.getElementById('videoModal')
-    if (modalElement) {
-      // Method 1: Bootstrap JS API
-      if ((window as any).bootstrap && (window as any).bootstrap.Modal) {
-        const modal = new (window as any).bootstrap.Modal(modalElement)
-        modal.show()
-      } 
-      // Method 2: Manual class manipulation if Bootstrap JS not available
-      else {
-        modalElement.classList.add('show')
-        modalElement.style.display = 'block'
-        modalElement.setAttribute('aria-modal', 'true')
-        modalElement.setAttribute('role', 'dialog')
-        
-        // Add backdrop
-        const backdrop = document.createElement('div')
-        backdrop.className = 'modal-backdrop fade show'
-        backdrop.id = 'modal-backdrop'
-        document.body.appendChild(backdrop)
-        document.body.classList.add('modal-open')
+
+  // Mobile device detection
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent,
+  )
+
+  if (isMobile) {
+    // Mobile: Open YouTube app or browser directly
+    const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`
+    window.open(youtubeUrl, '_blank')
+  } else {
+    // Desktop: Use modal
+    setTimeout(() => {
+      const modalElement = document.getElementById('videoModal')
+      if (modalElement) {
+        // Method 1: Bootstrap JS API
+        if ((window as any).bootstrap && (window as any).bootstrap.Modal) {
+          const modal = new (window as any).bootstrap.Modal(modalElement)
+          modal.show()
+        }
+        // Method 2: Manual class manipulation if Bootstrap JS not available
+        else {
+          modalElement.classList.add('show')
+          modalElement.style.display = 'block'
+          modalElement.setAttribute('aria-modal', 'true')
+          modalElement.setAttribute('role', 'dialog')
+
+          // Add backdrop
+          const backdrop = document.createElement('div')
+          backdrop.className = 'modal-backdrop fade show'
+          backdrop.id = 'modal-backdrop'
+          document.body.appendChild(backdrop)
+          document.body.classList.add('modal-open')
+        }
       }
-    }
-  }, 100)
+    }, 100)
+  }
 }
 
 const closeVideo = () => {
   selectedVideo.value = null
-  
+
   // Modal kapatma
   const modalElement = document.getElementById('videoModal')
   if (modalElement) {
@@ -291,14 +315,14 @@ const closeVideo = () => {
       if (modal) {
         modal.hide()
       }
-    } 
+    }
     // Manuel kapatma
     else {
       modalElement.classList.remove('show')
       modalElement.style.display = 'none'
       modalElement.removeAttribute('aria-modal')
       modalElement.removeAttribute('role')
-      
+
       // Remove backdrop
       const backdrop = document.getElementById('modal-backdrop')
       if (backdrop) {
@@ -452,6 +476,18 @@ onUnmounted(() => {
   font-size: 1.5rem;
   color: var(--bs-primary);
   transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .play-button {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  .play-overlay {
+    opacity: 1; /* Always visible on mobile */
+  }
 }
 
 .play-button:hover {
