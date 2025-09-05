@@ -46,6 +46,12 @@
               </router-link>
             </li>
             <li class="nav-item">
+              <router-link class="nav-link" to="/uyelik">
+                <i class="fas fa-users me-2"></i>
+                Üyelik
+              </router-link>
+            </li>
+            <li class="nav-item">
               <router-link class="nav-link" to="/blog">
                 <i class="fas fa-blog me-2"></i>
                 Blog
